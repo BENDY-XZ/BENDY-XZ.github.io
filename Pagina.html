@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enabled Records | Independent Record Label</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050507; color: #e2e8f0; overflow-x: hidden; }
+        .gothic-title { font-family: 'UnifrakturMaguntia', cursive; text-shadow: 0 0 25px rgba(255, 136, 0, 0.35); animation: floatLogo 6s ease-in-out infinite; }
+        .subtitle-cinzel { font-family: 'Cinzel', serif; letter-spacing: 0.25em; }
+        .glass-panel { background: rgba(18, 18, 22, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+        .glass-input { background: rgba(10, 10, 14, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); color: #ffffff; transition: all 0.3s ease; }
+        .glass-input:focus { border-color: rgba(255, 120, 0, 0.7); box-shadow: 0 0 18px rgba(255, 107, 0, 0.3); outline: none; }
+        .glass-pill { background: rgba(20, 20, 26, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); }
+        .glass-dropdown { background: rgba(12, 12, 18, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(10, 10, 14, 0.5); border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 107, 0, 0.6); border-radius: 8px; }
+        #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .btn-orange-neon { background: linear-gradient(135deg, #ff6b00 0%, #cc4400 100%); box-shadow: 0 0 25px rgba(255, 107, 0, 0.45); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-orange-neon:hover { box-shadow: 0 0 40px rgba(255, 120, 0, 0.8); transform: translateY(-2px); }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.3; transform: scale(0.92); } 50% { opacity: 0.85; transform: scale(1.15); } }
+        .breathing-glow { animation: pulseGlow 4.5s ease-in-out infinite; }
+        .view-section { transition: opacity 0.4s ease, transform 0.4s ease; }
+        .view-hidden { opacity: 0; transform: scale(0.97); pointer-events: none; position: absolute; width: 100%; }
+        .view-active { opacity: 1; transform: scale(1); position: relative; width: 100%; }
+        .i18n-text { transition: opacity 0.25s ease-in-out; }
+        .i18n-fading { opacity: 0 !important; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center relative py-12 px-4">
+
+    <canvas id="bgCanvas"></canvas>
+    <div class="fixed inset-0 bg-radial-gradient from-transparent via-[#050507]/80 to-[#050507] pointer-events-none z-0"></div>
+
+    <div class="absolute top-6 right-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="glass-panel w-12 h-11 rounded-xl flex items-center justify-center text-xs font-bold text-orange-400 border border-orange-500/30 hover:border-orange-500 transition-all shadow-lg">
+            EN
+        </button>
+    </div>
+
+    <main class="w-full max-w-xl mx-auto z-10 flex-grow flex flex-col justify-center items-center pb-24">
+
+        <section id="homeView" class="view-section view-active text-center flex flex-col items-center justify-center min-h-[70vh]">
+            <div class="relative group cursor-default">
+                <div class="absolute -inset-4 bg-gradient-to-r from-orange-600/30 via-amber-500/20 to-orange-600/30 rounded-full blur-3xl breathing-glow"></div>
+                <h1 class="gothic-title text-6xl md:text-8xl font-normal text-slate-100 tracking-wider mb-2 relative">
+                    Enabled Records
+                </h1>
+            </div>
+
+            <p class="i18n-text subtitle-cinzel text-xs md:text-sm text-slate-400 font-semibold tracking-[0.25em] uppercase mb-8 mt-2" data-i18n="lblSubtitle">
+                Independent Record Label
+            </p>
+
+            <div class="flex items-center gap-4 text-xs tracking-[0.25em] text-slate-500 font-medium mb-12 uppercase">
+                <span class="i18n-text" data-i18n="lblCountry">Mexico</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6b00]"></span>
+                <span class="i18n-text" data-i18n="lblEst">Est. 2026</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6b00]"></span>
+                <span class="i18n-text" data-i18n="lblWorld">Worldwide</span>
+            </div>
+
+            <button onclick="switchTab('submit')" class="glass-panel hover:bg-white/10 text-slate-300 hover:text-white px-8 py-3.5 rounded-full text-xs tracking-[0.2em] uppercase font-semibold transition-all border border-white/10 hover:border-orange-500/40 flex items-center gap-3">
+                <i class="fa-solid fa-paper-plane text-orange-500"></i>
+                <span class="i18n-text" data-i18n="btnSubmitDemo">Submit Demo</span>
+            </button>
+        </section>
+
+        <section id="submitView" class="view-section view-hidden w-full">
+            <div class="text-center mb-8">
+                <p class="i18n-text subtitle-cinzel text-xs text-orange-500/80 font-semibold tracking-[0.25em] uppercase mb-2" data-i18n="lblSubHeader">Demo Submission</p>
+                <h2 class="i18n-text text-3xl md:text-4xl font-bold text-white tracking-tight mb-3" data-i18n="lblFormTitle">Send us your sound</h2>
+                <p class="i18n-text text-slate-400 text-sm max-w-md mx-auto leading-relaxed" data-i18n="lblFormDesc">
+                    We listen to every demo that lands in our inbox. Share your best track and tell us who you are.
+                </p>
+            </div>
+
+            <form id="demoForm" onsubmit="handleFormSubmit(event)" class="glass-panel p-6 md:p-8 rounded-3xl space-y-5">
+                <div>
+                    <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2" data-i18n="lblArtist">Artist / Band Name</label>
+                    <input type="text" required placeholder="NOVA K" class="glass-input w-full px-4 py-3 rounded-xl text-sm">
+                </div>
+
+                <div>
+                    <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2" data-i18n="lblEmail">Email Address</label>
+                    <input type="email" required placeholder="you@email.com" class="glass-input w-full px-4 py-3 rounded-xl text-sm">
+                </div>
+
+                <div>
+                    <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2" data-i18n="lblTrackTitle">Track Title</label>
+                    <input type="text" required placeholder="Midnight Static" class="glass-input w-full px-4 py-3 rounded-xl text-sm">
+                </div>
+
+                <div class="relative">
+                    <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2" data-i18n="lblGenre">Genre</label>
+                    <div class="relative">
+                        <input type="text" id="genreInput" required autocomplete="off" placeholder="Search genre..." class="glass-input w-full px-4 py-3 rounded-xl text-sm pr-10" oninput="filterGenres()" onfocus="showGenres()" onblur="hideGenresWithDelay()">
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-xs"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div id="genreDropdown" class="glass-dropdown custom-scrollbar absolute left-0 right-0 top-full mt-2 rounded-2xl max-h-52 overflow-y-auto z-50 hidden border border-white/10 p-1.5"></div>
+                </div>
+
+                <div>
+                    <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2" data-i18n="lblDemoLink">Link to your demo</label>
+                    <input type="url" required placeholder="https://soundcloud.com/your-track" class="glass-input w-full px-4 py-3 rounded-xl text-sm">
+                </div>
+
+                <div class="relative">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="i18n-text block text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="lblBio">Tell us about you</label>
+                        <span id="charCounter" class="text-[10px] text-slate-500 font-mono">0/500</span>
+                    </div>
+                    <textarea id="bioTextarea" maxlength="500" rows="3" placeholder="Short bio..." oninput="updateCharCount()" class="glass-input w-full px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="btn-orange-neon w-full py-4 rounded-2xl font-bold text-sm tracking-[0.2em] text-white uppercase flex items-center justify-center gap-2 mt-4">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span class="i18n-text" data-i18n="btnSendDemo">Send Demo</span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <nav class="fixed bottom-6 z-50">
+        <div class="glass-pill p-1.5 rounded-full flex items-center gap-1 border border-white/10">
+            <button id="navSubmit" onclick="switchTab('submit')" class="px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span class="i18n-text" data-i18n="navSubmitTab">SUBMIT</span>
+            </button>
+            <button id="navHome" onclick="switchTab('home')" class="px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider bg-white/15 text-white shadow-lg transition-all flex items-center gap-2 border border-white/10">
+                <i class="fa-solid fa-house text-xs"></i>
+                <span class="i18n-text" data-i18n="navHomeTab">HOME</span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity">
+        <div class="glass-panel p-8 rounded-3xl max-w-sm w-full text-center border border-orange-500/30 transform scale-95 transition-transform" id="modalBox">
+            <div class="w-16 h-16 bg-orange-500/20 text-orange-400 border border-orange-500/40 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="i18n-text text-xl font-bold text-white mb-2" data-i18n="modalTitle">Demo Received!</h3>
+            <p class="i18n-text text-slate-400 text-sm mb-6 leading-relaxed" data-i18n="modalDesc">
+                Thank you for sending your track. Our A&R team will review your submission.
+            </p>
+            <button onclick="closeModal()" class="i18n-text w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs tracking-wider uppercase border border-white/10" data-i18n="modalBtn">
+                Back to Label
+            </button>
+        </div>
+    </div>
+
+    <script>
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzXEUxHJr1PkI0X0bCNbX6sKRvuHGX2dWvyGh0kg14UwhYgY2qY_5MsYJDd9zPAefEQdA/exec';
+            
+            const formData = {
+                artist: e.target.querySelector('input').value,
+                email: e.target.querySelector('input[type="email"]').value,
+                trackTitle: e.target.querySelectorAll('input')[2].value,
+                genre: document.getElementById('genreInput').value,
+                demoLink: e.target.querySelector('input[type="url"]').value,
+                bio: document.getElementById('bioTextarea').value
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                const modal = document.getElementById('successModal');
+                const modalBox = document.getElementById('modalBox');
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalBox.classList.remove('scale-95');
+                modalBox.classList.add('scale-100');
+                e.target.reset();
+                updateCharCount();
+            });
+        }
+
+        let currentLang = 'EN';
+        const translations = {
+            EN: {
+                lblSubtitle: "Independent Record Label", lblCountry: "Mexico", lblEst: "Est. 2026", lblWorld: "Worldwide",
+                btnSubmitDemo: "Submit Demo", lblSubHeader: "Demo Submission", lblFormTitle: "Send us your sound",
+                lblFormDesc: "We listen to every demo that lands in our inbox. Share your best track and tell us who you are.",
+                lblArtist: "Artist / Band Name", lblEmail: "Email Address", lblTrackTitle: "Track Title",
+                lblGenre: "Genre", lblDemoLink: "Link to your demo", lblBio: "Tell us about you",
+                btnSendDemo: "Send Demo", navSubmitTab: "SUBMIT", navHomeTab: "HOME",
+                modalTitle: "Demo Received!", modalDesc: "Thank you for sending your track. Our A&R team will review your submission shortly.",
+                modalBtn: "Back to Label"
+            },
+            ES: {
+                lblSubtitle: "Sello Discográfico Independiente", lblCountry: "México", lblEst: "Est. 2026", lblWorld: "Mundial",
+                btnSubmitDemo: "Enviar Demo", lblSubHeader: "Envío de Demos", lblFormTitle: "Envíanos tu sonido",
+                lblFormDesc: "Escuchamos cada demo que llega a nuestro buzón. Comparte tu mejor pista y dinos quién eres.",
+                lblArtist: "Nombre de Artista / Banda", lblEmail: "Correo Electrónico", lblTrackTitle: "Título de la Pista",
+                lblGenre: "Género Musical", lblDemoLink: "Enlace a tu demo", lblBio: "Cuéntanos sobre ti",
+                btnSendDemo: "Enviar Demo", navSubmitTab: "ENVIAR", navHomeTab: "INICIO",
+                modalTitle: "¡Demo Recibida!", modalDesc: "Gracias por enviar tu pista. Nuestro equipo de A&R revisará tu propuesta en breve.",
+                modalBtn: "Volver al Sello"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'EN' ? 'ES' : 'EN';
+            const btn = document.getElementById('langBtn');
+            btn.textContent = currentLang === 'EN' ? 'EN' : 'ES (Lat)';
+
+            const i18nElements = document.querySelectorAll('.i18n-text');
+            i18nElements.forEach(el => el.classList.add('i18n-fading'));
+
+            setTimeout(() => {
+                i18nElements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[currentLang][key]) {
+                        el.textContent = translations[currentLang][key];
+                    }
+                    el.classList.remove('i18n-fading');
+                });
+            }, 250);
+        }
+
+        const allGenres = [
+            "Acid House", "Acid Techno", "Amapiano", "Ambient", "Alternative Rock", "Bachata", "Big Room", 
+            "Brazilian Phonk", "Breakbeat", "Breakcore", "Chillwave", "Corridos Tumbados", "Cumbia", "Cyberpunk", 
+            "Dark Ambient", "Dark Techno", "Darkwave", "Deep House", "Deep Techno", "Digital Hardcore", "Drill", 
+            "Drum and Bass (DnB)", "Dubstep", "Dungeon Synth", "EBM / Industrial", "Electro House", "Experimental", 
+            "Flamenco", "Footwork", "Future Bass", "Ghetto House", "Gothic Rock", "Grime", "Hardstyle", 
+            "Heavy Metal", "Hip-Hop / Rap", "House", "Hyperpop", "Indie Rock", "Industrial Techno", "J-Pop", 
+            "K-Pop", "Latin Pop", "Lo-Fi Beats", "Melodic Techno", "Midtempo Cyber", "Minimal Techno", "Phonk", 
+            "Pop", "Progressive House", "Psytrance", "R&B / Soul", "Reggae", "Reggaeton", "Riddim", "Rock", 
+            "Salsa", "Slap House", "Speedcore", "Synthwave", "Tech House", "Techno", "Trance", "Trap", 
+            "Trip-Hop", "UK Garage", "Vaporwave", "Witch House"
+        ];
+
+        function filterGenres() {
+            const input = document.getElementById('genreInput');
+            const dropdown = document.getElementById('genreDropdown');
+            const filter = input.value.toLowerCase().trim();
+            dropdown.innerHTML = '';
+
+            const matches = allGenres.filter(g => g.toLowerCase().includes(filter));
+            if (matches.length === 0) {
+                const noResult = document.createElement('div');
+                noResult.className = 'px-4 py-2.5 text-xs text-slate-500 italic';
+                noResult.textContent = 'Custom genre: "' + input.value + '"';
+                dropdown.appendChild(noResult);
+            } else {
+                matches.forEach(genre => {
+                    const item = document.createElement('div');
+                    item.className = 'px-4 py-2.5 text-xs text-slate-300 hover:text-white hover:bg-orange-500/20 cursor-pointer rounded-xl transition-all';
+                    item.textContent = genre;
+                    item.onmousedown = () => {
+                        input.value = genre;
+                        dropdown.classList.add('hidden');
+                    };
+                    dropdown.appendChild(item);
+                });
+            }
+            dropdown.classList.remove('hidden');
+        }
+
+        function showGenres() { filterGenres(); }
+        function hideGenresWithDelay() { setTimeout(() => document.getElementById('genreDropdown').classList.add('hidden'), 200); }
+
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [], shootingStars = [];
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.6 + 0.2;
+                this.speedY = -(Math.random() * 0.3 + 0.1);
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.y += this.speedY;
+                if (this.y < 0) { this.reset(); this.y = canvas.height; }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        class ShootingStar {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width * 1.2;
+                this.y = Math.random() * (canvas.height * 0.4);
+                this.length = Math.random() * 90 + 70;
+                this.speed = Math.random() * 8 + 6;
+                this.opacity = 1;
+                this.active = false;
+            }
+            spawn() { this.reset(); this.active = true; }
+            update() {
+                if (!this.active) return;
+                this.x -= Math.cos(Math.PI / 4) * this.speed;
+                this.y += Math.sin(Math.PI / 4) * this.speed;
+                this.opacity -= 0.015;
+                if (this.opacity <= 0) this.active = false;
+            }
+            draw() {
+                if (!this.active) return;
+                const tailX = this.x + Math.cos(Math.PI / 4) * this.length;
+                const tailY = this.y - Math.sin(Math.PI / 4) * this.length;
+                const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+                gradient.addColorStop(0, `rgba(255, 220, 180, ${this.opacity})`);
+                gradient.addColorStop(0.3, `rgba(255, 120, 0, ${this.opacity * 0.6})`);
+                gradient.addColorStop(1, `rgba(255, 107, 0, 0)`);
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(tailX, tailY);
+                ctx.lineWidth = 1.2;
+                ctx.strokeStyle = gradient;
+                ctx.stroke();
+            }
+        }
+
+        for (let i = 0; i < 65; i++) particles.push(new Particle());
+        for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
+
+        setInterval(() => {
+            const inactive = shootingStars.find(s => !s.active);
+            if (inactive) inactive.spawn();
+        }, 2200);
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            shootingStars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        function switchTab(tab) {
+            const homeView = document.getElementById('homeView');
+            const submitView = document.getElementById('submitView');
+            const navHome = document.getElementById('navHome');
+            const navSubmit = document.getElementById('navSubmit');
+
+            const activeClass = "bg-white/15 text-white shadow-lg border border-white/10";
+            const inactiveClass = "text-slate-400 hover:text-white";
+
+            if (tab === 'home') {
+                homeView.classList.remove('view-hidden'); homeView.classList.add('view-active');
+                submitView.classList.remove('view-active'); submitView.classList.add('view-hidden');
+                navHome.className = `px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all flex items-center gap-2 ${activeClass}`;
+                navSubmit.className = `px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all flex items-center gap-2 ${inactiveClass}`;
+            } else {
+                submitView.classList.remove('view-hidden'); submitView.classList.add('view-active');
+                homeView.classList.remove('view-active'); homeView.classList.add('view-hidden');
+                navSubmit.className = `px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all flex items-center gap-2 ${activeClass}`;
+                navHome.className = `px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all flex items-center gap-2 ${inactiveClass}`;
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateCharCount() {
+            const textarea = document.getElementById('bioTextarea');
+            document.getElementById('charCounter').textContent = `${textarea.value.length}/500`;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const modalBox = document.getElementById('modalBox');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-100'); modalBox.classList.add('scale-95');
+            setTimeout(() => switchTab('home'), 300);
+        }
+    </script>
+
+</body>
+</html>
